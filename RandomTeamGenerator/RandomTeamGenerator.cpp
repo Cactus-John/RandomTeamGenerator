@@ -21,7 +21,6 @@ class randomTeamGenerator {
 
     // user writes all the players in his team
     void teamMembers() {
-        
         string* players = new string[teamNumbers * playerNumbers];
         for (int i = 0; i < teamNumbers * playerNumbers; i++) {
             cin >> players[i];
