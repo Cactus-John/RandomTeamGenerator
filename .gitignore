@@ -31,3 +31,7 @@
 *.out
 *.app
 *.db-shm
+RandomTeamGenerator/.vs/RandomTeamGenerator/v17/Browse.VC.db
+*.db-wal
+*.opendb
+*.ipch
