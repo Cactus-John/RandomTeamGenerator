@@ -1,5 +1,8 @@
 
 #include <iostream>
+#include <string>
+#include <cstdlib>
+#include <time.h>
 #include <algorithm>
 using namespace std;
 
@@ -7,46 +10,39 @@ class randomTeamGenerator {
 
     public:
         int playerNumbers, teamNumbers;
-    private:
         string players;
-
-    public:
-        randomTeamGenerator() {
-            players = "0";
-        }
-        
-    randomTeamGenerator(string players) {
-        this->players = players;
-    }
 
     // user writes all the players in his team
     void teamMembers() {
-        string* players = new string[teamNumbers * playerNumbers];
-        for (int i = 0; i < teamNumbers * playerNumbers; i++) {
+        string* players = new string[playerNumbers];
+        for (int i = 0; i < playerNumbers ; i++) {
             cin >> players[i];
         }
     }
 
     void divideTeams() {
-        if (teamNumbers % 2 == 0) {
-            for (int i = 0; i < teamNumbers * playerNumbers; i++) {
-                players[i] = teamNumbers;
-                cout << players[i];
+        srand(time(NULL));
+        int rndm = rand() % playerNumbers + 1;
+        int i = 0;
+        while (i <= playerNumbers) {
+            cout << players[rndm] << endl;
+            if (i % teamNumbers == 0) {
+                cout << endl;
+                i++;
             }
-        }
+        }    
     }
 };
 
 int main() {
 
     randomTeamGenerator names;
-    cout << "Enter the number of teams: " << endl;
-    cin >> names.teamNumbers;
     cout << "Enter the number of players: " << endl;
-    cin >> names.playerNumbers;
+    cout << "Number of players: "; cin >> names.playerNumbers; 
     system("CLS");
-    cout << "Write the names of the players: " << endl; 
-    names.teamMembers();
+    cout << "Write the names of the players: " << endl;  names.teamMembers();
+    cout << "How many teams you want to have? : " << endl; cin >> names.teamNumbers;
+ 
     names.divideTeams();
     system("CLS");
 }
