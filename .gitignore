@@ -37,3 +37,11 @@
 *.ipch
 *.vsidx
 *.lock
+*.tlog
+*.recipe
+*.ilk
+*.log
+*.pdb
+*.txt
+*.idb
+RandomTeamGenerator/.vs/RandomTeamGenerator/v17/.suo
