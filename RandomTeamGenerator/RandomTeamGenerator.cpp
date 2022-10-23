@@ -7,9 +7,9 @@ using namespace std;
 
 class randomTeamGenerator {
 
-    public:
-        int playerNumbers{}, teamNumbers{};
-        string players;
+public:
+    int playerNumbers{}, teamNumbers{};
+    string players;
 
     // user writes all the players in both teams
 
@@ -24,28 +24,34 @@ class randomTeamGenerator {
         for (int i = 0; i < playerNumbers; i++)
             cin >> players[i];
 
-        /*if (playerNumbers % teamNumbers == 0 && playerNumbers > teamNumbers) {
-            count = playerNumbers / teamNumbers;
-            cout << endl;
-            for (int i = 0; i < count; i++) {
-                cout << players[i] << endl;
-            }
-    
-            cout << "--------" << endl;
-            for (int i = count; i < playerNumbers; i++) {
-                cout << players[i] << endl;
-            }
-        }*/
-
         int random = rand() % (playerNumbers / teamNumbers) + 1;
-        if (playerNumbers % teamNumbers == 0 && playerNumbers > teamNumbers) {
+        string count;
+        if (playerNumbers % teamNumbers == 0) {
             cout << endl;
             for (int i = 0; i < teamNumbers; i++) {
+                count = players[random]; 
                 cout << players[random] << endl;
                 random = rand() % (playerNumbers / teamNumbers) + 1;
                 random++;
             }
-             
+
+            cout << "--------" << endl;
+
+            for (int i = teamNumbers; i < playerNumbers; i++) {          
+                cout << players[random] << endl;
+                random = rand() % (playerNumbers / teamNumbers) + 1;
+                random++;
+            }
+        } 
+
+        if (playerNumbers % teamNumbers != 0) {
+            cout << endl;
+            for (int i = 0; i < teamNumbers ; i++) {
+                cout << players[random] << endl;
+                random = rand() % (playerNumbers / teamNumbers) + 1;
+                random++;
+            }
+
             cout << "--------" << endl;
 
             for (int i = teamNumbers; i < playerNumbers; i++) {
@@ -64,10 +70,17 @@ int main() {
     cout << "Number of players: "; cin >> names.playerNumbers;
     cout << "How many teams you want to have? : "; cin >> names.teamNumbers;
     system("CLS");
-    cout << "Write the names of the players: " << endl;  names.divideTeams();
 
-    if (names.playerNumbers < names.teamNumbers)
+    if (names.teamNumbers == 1 && names.playerNumbers != 1) {
+        cout << "Your number of teams is 1. You must enter 2 or more teams!!!" << endl;
         exit(-1);
-    
+    }
+
+    else if (names.playerNumbers < names.teamNumbers) {
+        cout << "You entered more teams than players which is not possible!!!" << endl;
+        exit(-1);
+    }
+     
+    cout << "Write the names of the players: " << endl;  names.divideTeams();
     return 0;
 }
