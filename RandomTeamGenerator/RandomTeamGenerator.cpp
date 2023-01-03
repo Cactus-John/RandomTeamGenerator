@@ -6,7 +6,8 @@
 #include <string>
 using namespace std;
 
-void print(vector<string> team1, vector<string> team2);
+void print_team1(vector<string> team1);
+void print_team2(vector<string> team2);
 
 int main() {
 
@@ -44,18 +45,25 @@ int main() {
     // Print the teams
 
     cout << "Team 1:";
-    print(team1, team2);
+    print_team1(team1);
     cout << endl;
     cout << "Team 2:";
-    print(team1, team2);
+    print_team2(team2);
     cout << endl;
 
     return 0;
 }
 
-// Function to print teams (team1 & team2)
-void print(vector<string> team1, vector<string> team2) {
+// Function to print team1
+void print_team1(vector<string> team1) {
     for (const auto& player : team1) {
+        cout << ' ' << player;
+    }
+}
+
+// Function to print team2
+void print_team2(vector<string> team2) {
+    for (const auto& player : team2) {
         cout << ' ' << player;
     }
 }
