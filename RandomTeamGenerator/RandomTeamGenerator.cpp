@@ -1,86 +1,49 @@
 
 #include <iostream>
-#include <cstdlib>
-#include <time.h>
 #include <algorithm>
+#include <vector>
+#include <random>
+#include <string>
 using namespace std;
-
-class randomTeamGenerator {
-
-public:
-    int playerNumbers{}, teamNumbers{};
-    string players;
-
-    // user writes all the players in both teams
-
-    // All players are divided into how many teams the user wants
-    /*
-       divide the players into teams: if the number of teams is even, divide the number of players by the number of teams to see if there is any remainder, we need to check aswell
-       if both the number of teams and the number of players are greater or less than one another*/
-
-       // if the number of teams is odd, divide the number of players by the number of teams and add the remaining 1 
-    void divideTeams() {
-        string players[50];
-        for (int i = 0; i < playerNumbers; i++)
-            cin >> players[i];
-
-        int random = rand() % (playerNumbers / teamNumbers) + 1;
-        string count;
-        if (playerNumbers % teamNumbers == 0) {
-            cout << endl;
-            for (int i = 0; i < teamNumbers; i++) {
-                count = players[random]; 
-                cout << players[random] << endl;
-                random = rand() % (playerNumbers / teamNumbers) + 1;
-                random++;
-            }
-
-            cout << "--------" << endl;
-
-            for (int i = teamNumbers; i < playerNumbers; i++) {          
-                cout << players[random] << endl;
-                random = rand() % (playerNumbers / teamNumbers) + 1;
-                random++;
-            }
-        } 
-
-        if (playerNumbers % teamNumbers != 0) {
-            cout << endl;
-            for (int i = 0; i < teamNumbers ; i++) {
-                cout << players[random] << endl;
-                random = rand() % (playerNumbers / teamNumbers) + 1;
-                random++;
-            }
-
-            cout << "--------" << endl;
-
-            for (int i = teamNumbers; i < playerNumbers; i++) {
-                cout << players[random] << endl;
-                random = rand() % (playerNumbers / teamNumbers) + 1;
-                random++;
-            }
-        }
-    }
-};
 
 int main() {
 
-    srand(time(nullptr));
-    randomTeamGenerator names;
-    cout << "Number of players: "; cin >> names.playerNumbers;
-    cout << "How many teams you want to have? : "; cin >> names.teamNumbers;
-    system("CLS");
+    // Get the number of players from the user
+    cout << "Enter the number of players: ";
+    int num_players;
+    cin >> num_players;
 
-    if (names.teamNumbers == 1 && names.playerNumbers != 1) {
-        cout << "Your number of teams is 1. You must enter 2 or more teams!!!" << endl;
-        exit(-1);
+    // Create a vector to store the players
+    vector<string> players(num_players);
+
+    // Allow the user to enter the names of the players
+    cout << "Enter the names of the players, separated by spaces: ";
+    for (int i = 0; i < num_players; ++i) {
+        cin >> players[i];
     }
 
-    else if (names.playerNumbers < names.teamNumbers) {
-        cout << "You entered more teams than players which is not possible!!!" << endl;
-        exit(-1);
+    // Seed the random number generator
+    mt19937 rng(random_device{}());
+
+    // Shuffle the players
+    shuffle(players.begin(), players.end(), rng);
+
+    // Divide the players into teams
+    const int team_size = num_players / 2;
+    vector<string> team1(players.begin(), players.begin() + team_size);
+    vector<string> team2(players.begin() + team_size, players.end());
+
+    // Print the teams
+    std::cout << "Team 1:";
+    for (const auto& player : team1) {
+        cout << ' ' << player;
     }
-     
-    cout << "Write the names of the players: " << endl;  names.divideTeams();
+    cout << endl;
+    cout << "Team 2:";
+    for (const auto& player : team2) {
+        cout << ' ' << player;
+    }
+    cout << endl;
+
     return 0;
 }
